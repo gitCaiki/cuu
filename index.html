@@ -119,7 +119,32 @@ button{
 #nao{
     background:#ff4d4d;
     color:white;
+}
+
+#nao.fugindo{
     position:absolute;
+}
+
+.mensagem-nao{
+    position:absolute;
+    background:#ff3b7f;
+    color:white;
+    padding:10px 20px;
+    border-radius:10px;
+    font-size:18px;
+    animation:fadeIn 0.3s ease-in;
+    z-index:100;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 }
 
 #mensagem{
@@ -251,31 +276,36 @@ aceita ir para São Paulo cmg passar seus <b><p>PIORES</p></b> dias?
 const btnNao=document.getElementById("nao");
 const btnSim=document.getElementById("sim");
 const tela=document.getElementById("mensagem");
-let contadorNao=0;
 
-btnNao.style.left="55%";
-btnNao.style.top="58%";
-
-btnNao.addEventListener("mouseover",fugir);
-btnNao.addEventListener("click",fugir);
-
-function fugir(){
-    contadorNao++;
+btnNao.addEventListener("click", function(e){
+    // Add class to make it absolute
+    btnNao.classList.add("fugindo");
     
-    if(contadorNao>=2){
-        btnNao.style.display="none";
-        return;
+    // Move it really far away
+    btnNao.style.left="-9999px";
+    btnNao.style.top="-9999px";
+    
+    // Create message at click position
+    const mensagem = document.createElement("div");
+    mensagem.className = "mensagem-nao";
+    mensagem.textContent = "sozinha voce nao vai";
+    mensagem.style.left = e.clientX + "px";
+    mensagem.style.top = e.clientY + "px";
+    document.body.appendChild(mensagem);
+});
+
+btnNao.addEventListener("mouseover", function(){
+    // Only run if not already fugindo
+    if(!btnNao.classList.contains("fugindo")){
+        btnNao.classList.add("fugindo");
+        const largura=window.innerWidth-150;
+        const altura=window.innerHeight-80;
+        const x=Math.random()*largura;
+        const y=Math.random()*altura;
+        btnNao.style.left=x+"px";
+        btnNao.style.top=y+"px";
     }
-
-    const largura=window.innerWidth-150;
-    const altura=window.innerHeight-80;
-
-    const x=Math.random()*largura;
-    const y=Math.random()*altura;
-
-    btnNao.style.left=x+"px";
-    btnNao.style.top=y+"px";
-}
+});
 
 btnSim.onclick=function(){
 
