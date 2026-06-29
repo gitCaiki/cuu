@@ -28,13 +28,73 @@ body{
     text-align:center;
     width:100%;
     max-width:500px;
+    position:relative;
 }
 
 h1{
     font-size:34px;
-    margin-bottom:40px;
+    margin-bottom:20px;
     color:#ff3b7f;
     line-height:1.4;
+}
+
+.image-container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+#mariaFoto{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid #ff3b7f;
+}
+
+.arrow{
+    font-size:50px;
+    animation:point 0.5s ease-in-out infinite alternate;
+}
+
+.arrow-left{
+    animation-delay:0s;
+}
+
+.arrow-right{
+    animation-delay:0.1s;
+}
+
+.arrow-top{
+    position:absolute;
+    top:220px;
+    left:50%;
+    transform:translateX(-50%);
+    animation-delay:0.2s;
+}
+
+@keyframes point{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(10px);
+    }
+}
+
+.arrow-top{
+    animation:pointDown 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pointDown{
+    from{
+        transform:translateX(-50%) translateY(0);
+    }
+    to{
+        transform:translateX(-50%) translateY(10px);
+    }
 }
 
 button{
@@ -121,7 +181,20 @@ button{
 @media (max-width: 600px){
     h1{
         font-size:24px;
-        margin-bottom:30px;
+        margin-bottom:20px;
+    }
+
+    #mariaFoto{
+        width:150px;
+        height:150px;
+    }
+
+    .arrow{
+        font-size:40px;
+    }
+
+    .arrow-top{
+        top:180px;
     }
 
     button{
@@ -155,6 +228,13 @@ Maria,<br><br>
 aceita ir para São Paulo cmg passar seus <b><p>PIORES</p></b> dias?
 </h1>
 
+<div class="image-container">
+    <div class="arrow arrow-left">👉</div>
+    <img id="mariaFoto" src="Captura de tela 2026-06-29 011020.png" alt="Maria">
+    <div class="arrow arrow-right">👈</div>
+</div>
+<div class="arrow arrow-top">👇</div>
+
 <button id="sim">Sim ❤️</button>
 <button id="nao">Não 😠</button>
 
@@ -171,6 +251,7 @@ aceita ir para São Paulo cmg passar seus <b><p>PIORES</p></b> dias?
 const btnNao=document.getElementById("nao");
 const btnSim=document.getElementById("sim");
 const tela=document.getElementById("mensagem");
+let contadorNao=0;
 
 btnNao.style.left="55%";
 btnNao.style.top="58%";
@@ -179,6 +260,12 @@ btnNao.addEventListener("mouseover",fugir);
 btnNao.addEventListener("click",fugir);
 
 function fugir(){
+    contadorNao++;
+    
+    if(contadorNao>=2){
+        btnNao.style.display="none";
+        return;
+    }
 
     const largura=window.innerWidth-150;
     const altura=window.innerHeight-80;
