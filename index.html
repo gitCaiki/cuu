@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convite Especial ❤️</title>
+<title>bucetao</title>
 
 <style>
 *{
@@ -21,16 +21,20 @@ body{
     align-items:center;
     overflow:hidden;
     background:linear-gradient(135deg,#ffd6e8,#ffeecf);
+    padding:20px;
 }
 
 .container{
     text-align:center;
+    width:100%;
+    max-width:500px;
 }
 
 h1{
     font-size:34px;
     margin-bottom:40px;
     color:#ff3b7f;
+    line-height:1.4;
 }
 
 button{
@@ -69,6 +73,17 @@ button{
     font-size:55px;
     color:#ff4d88;
     overflow:hidden;
+    padding:20px;
+    text-align:center;
+}
+
+#mensagem h1{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+#mensagem h2{
+    font-size:30px;
 }
 
 .pet{
@@ -99,6 +114,33 @@ button{
     }
     to{
         transform:translateY(110vh) rotate(900deg);
+    }
+}
+
+/* Responsividade para celulares */
+@media (max-width: 600px){
+    h1{
+        font-size:24px;
+        margin-bottom:30px;
+    }
+
+    button{
+        padding:15px 30px;
+        font-size:18px;
+    }
+
+    #mensagem h1{
+        font-size:40px;
+    }
+
+    #mensagem h2{
+        font-size:20px;
+    }
+
+    #gatoPalmas{
+        width:150px !important;
+        bottom:10px !important;
+        right:10px !important;
     }
 }
 </style>
