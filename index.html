@@ -121,19 +121,18 @@ button{
     color:white;
 }
 
-#nao.fugindo{
-    position:absolute;
-}
-
 .mensagem-nao{
     position:absolute;
+    inset:0;
     background:#ff3b7f;
     color:white;
-    padding:10px 20px;
-    border-radius:10px;
-    font-size:18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:150px;
+    font-weight:bold;
     animation:fadeIn 0.3s ease-in;
-    z-index:100;
+    z-index:1000;
 }
 
 @keyframes fadeIn{
@@ -240,6 +239,10 @@ button{
         bottom:10px !important;
         right:10px !important;
     }
+
+    .mensagem-nao{
+        font-size:60px;
+    }
 }
 </style>
 
@@ -277,34 +280,18 @@ const btnNao=document.getElementById("nao");
 const btnSim=document.getElementById("sim");
 const tela=document.getElementById("mensagem");
 
-btnNao.addEventListener("click", function(e){
-    // Add class to make it absolute
-    btnNao.classList.add("fugindo");
-    
-    // Move it really far away
-    btnNao.style.left="-9999px";
-    btnNao.style.top="-9999px";
-    
-    // Create message at click position
+btnNao.addEventListener("click", function(){
+    // Create big "SEU CU" message
     const mensagem = document.createElement("div");
     mensagem.className = "mensagem-nao";
-    mensagem.textContent = "sozinha voce nao vai";
-    mensagem.style.left = e.clientX + "px";
-    mensagem.style.top = e.clientY + "px";
+    mensagem.textContent = "SEU CU";
     document.body.appendChild(mensagem);
-});
-
-btnNao.addEventListener("mouseover", function(){
-    // Only run if not already fugindo
-    if(!btnNao.classList.contains("fugindo")){
-        btnNao.classList.add("fugindo");
-        const largura=window.innerWidth-150;
-        const altura=window.innerHeight-80;
-        const x=Math.random()*largura;
-        const y=Math.random()*altura;
-        btnNao.style.left=x+"px";
-        btnNao.style.top=y+"px";
-    }
+    
+    // Wait 5 seconds and then go back with only Sim button
+    setTimeout(function(){
+        mensagem.remove();
+        btnNao.style.display = "none";
+    }, 3000);
 });
 
 btnSim.onclick=function(){
